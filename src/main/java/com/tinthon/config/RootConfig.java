@@ -2,6 +2,7 @@ package com.tinthon.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.core.type.filter.RegexPatternTypeFilter;
 
@@ -15,6 +16,7 @@ import com.tinthon.config.RootConfig.WebPackage;
         excludeFilters = {
         @ComponentScan.Filter(type = FilterType.CUSTOM, value = WebPackage.class)
 })
+@EnableAspectJAutoProxy
 public class RootConfig {
     public static class WebPackage extends RegexPatternTypeFilter {
         public WebPackage() {
