@@ -29,6 +29,7 @@ dependencies {
     compile 'mysql:mysql-connector-java:6.0.5'
     compile 'org.thymeleaf:thymeleaf:3.0.3.RELEASE'
     compile 'org.thymeleaf:thymeleaf-spring4:3.0.3.RELEASE'
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE'
     compile 'org.hibernate:hibernate-core:5.1.0.Final'
     compile "javax.servlet:jstl:1.2"
     compile 'javax.inject:javax.inject:1'

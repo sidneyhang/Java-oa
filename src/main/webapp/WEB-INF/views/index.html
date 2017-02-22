@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" th:fragment="index(hello)" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
   <head th:replace="base/header::header(~{::title})">
       <title>主页</title>
   </head>
 
   <body>
-
-  <section id="container" >
       <!--header start-->
       <header class="header white-bg">
               <div class="sidebar-toggle-box">
@@ -232,7 +231,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="img/avatar1_small.jpg">
-                            <span class="username">Jhon Doue</span>
+                            <span class="username" sec:authentication="name">Jhon Doue</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -240,7 +239,7 @@
                             <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                             <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                             <li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>
-                            <li><a href="views/login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                            <li><a href="#" onclick="doSubmitForm();"><i class="fa fa-key"></i> Log Out</a></li>
                         </ul>
                     </li>
                     <li class="sb-toggle-right">
@@ -452,8 +451,9 @@
               <!--state overview start-->
               <!--state overview end-->
               <!--<p>[[${"hello"}]]</p>-->
-              <p th:text="#{home.welcome}">hello</p>
-              <p th:text="${'hello'}">world.</p>
+              <div sec:authorize="isAuthenticated()">
+                  Hello <span sec:authentication="name">someone</span>
+              </div>
           </section>
       </section>
       <!--main content end-->
@@ -631,7 +631,7 @@
     <script src="js/easy-pie-chart.js"></script>
     <script src="js/count.js"></script>
 
-  <script>
+  <script th:inline="javascript">
 
       //owl carousel
 
@@ -645,6 +645,18 @@
 
           });
       });
+
+      function doSubmitForm() {
+          var form = document.createElement("form");
+          var input = document.createElement("input");
+          document.body.appendChild(form);
+          form.appendChild(input);
+          input.name = [[${_csrf.parameterName}]];
+          input.value = [[${_csrf.token}]];
+          form.action = "/logout";
+          form.method = "post";
+          form.submit();
+      }
 
       //custom select box
 
