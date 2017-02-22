@@ -1,4 +1,4 @@
-package com.tinthon.beans;
+package com.tinthon.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

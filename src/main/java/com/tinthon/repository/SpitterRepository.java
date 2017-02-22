@@ -1,6 +1,6 @@
 package com.tinthon.repository;
 
-import com.tinthon.beans.Spitter;
+import com.tinthon.domain.Spitter;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

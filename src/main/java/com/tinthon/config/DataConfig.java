@@ -50,7 +50,7 @@ public class DataConfig {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
-        factoryBean.setPackagesToScan("com.tinthon.beans");
+        factoryBean.setPackagesToScan("com.tinthon.domain");
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto","update"));
         properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect"));

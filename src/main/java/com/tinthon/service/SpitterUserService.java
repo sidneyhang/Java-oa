@@ -1,8 +1,7 @@
 package com.tinthon.service;
 
-import com.tinthon.beans.Spitter;
+import com.tinthon.domain.Spitter;
 import com.tinthon.repository.SpitterRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
