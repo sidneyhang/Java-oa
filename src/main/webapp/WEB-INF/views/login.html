@@ -58,7 +58,9 @@
 <body>
 <div class="container">
 
-
+    <div th:if="${param.logout}">
+        <p style="color: green;">您已退出登录</p>
+    </div>
 
     <form class="form-signin" th:action="@{/login}" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>

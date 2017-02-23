@@ -1,7 +1,6 @@
-package com.tinthon.service;
+package com.tinthon.config;
 
-import com.tinthon.domain.Spitter;
-import com.tinthon.repository.SpitterRepository;
+import com.tinthon.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -13,26 +12,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sidney on 2017/2/15.
+ * Created by sidney on 2017/2/23.
  */
-public class SpitterUserService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
+    private UserRepository userRepository;
 
-    private SpitterRepository spitterRepository;
-
-    public SpitterUserService(SpitterRepository spitterRepository) {
-        this.spitterRepository = spitterRepository;
+    UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Spitter spitter = spitterRepository.findByUsername(username);
-        if (spitter != null) {
+        com.tinthon.domain.User user = userRepository.findByAccount(username);
+        if (user != null) {
             List<GrantedAuthority> authorityList = new ArrayList<GrantedAuthority>();
             authorityList.add(new SimpleGrantedAuthority("ROLE_SPITTER"));
 
             return new User(
-                    spitter.getUsername(),
-                    spitter.getPassword(),
+                    user.getAccount(),
+                    user.getPassword(),
                     authorityList
             );
         }

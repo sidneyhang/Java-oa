@@ -1,7 +1,6 @@
 package com.tinthon.config;
 
-import com.tinthon.repository.SpitterRepository;
-import com.tinthon.service.SpitterUserService;
+import com.tinthon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private SpitterRepository spitterRepository;
+    private UserRepository userRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -33,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
                 .permitAll()
                 .and()
                 .authorizeRequests()
@@ -62,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .passwordEncoder(new StandardPasswordEncoder("53cr3t"));
 
         auth
-                .userDetailsService(new SpitterUserService(spitterRepository));
+                .userDetailsService(new UserDetailsServiceImpl(userRepository));
 
     }
 }
