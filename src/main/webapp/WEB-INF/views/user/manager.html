@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh" th:replace="layout/app_layout :: app(~{::title}, ~{::link}, ~{::script}, ~{::.row})" xmlns:th="http://www.thymeleaf.org">
+<title>Users</title>
+
+<!--dynamic table-->
+<link rel="stylesheet" href="/assets/advanced-datatable/media/css/demo_page.css" />
+<link rel="stylesheet" href="/assets/advanced-datatable/media/css/demo_table.css" />
+<link rel="stylesheet" href="/assets/data-tables/DT_bootstrap.css" />
+
+<!-- page start-->
+<div class="row">
+    <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                用户列表
+            </header>
+            <div class="panel-body">
+                <div class="adv-table">
+                    <table  class="display table table-bordered table-striped" id="dynamic-table">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>创建时间</th>
+                            <th>最后登录</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="gradeX" th:each="user : ${users}">
+                            <td th:text="${user.getAccount()}">Trident</td>
+                            <td th:text="${user.getCreateTime()}">Internet
+                                Explorer 4.0</td>
+                            <td th:text="${user.getLastLoginTime()}">Win 95+</td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>用户名</th>
+                            <th>创建时间</th>
+                            <th>最后登录</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!--script for this page-->
+<script src="/assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+<script src="/assets/data-tables/DT_bootstrap.js"></script>
+
+<!--dynamic table initialization -->
+<script src="/js/dynamic_table_init.js"></script>
+
+</html>

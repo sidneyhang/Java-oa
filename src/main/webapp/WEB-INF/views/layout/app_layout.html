@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html th:fragment="app(title, links, scripts, content)" lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head_layout :: head(${title}, ${links})">
+
+</head>
+<body>
+<section id="container" class="">
+
+    <!--header start-->
+    <div th:replace="layout/header :: header"></div>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <div th:replace="layout/left_sidebar :: sidebar"></div>
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+
+            <div th:replace="${content}"></div>
+
+        </section>
+    </section>
+    <!--main content end-->
+
+    <!-- Right Slidebar start -->
+    <div th:replace="layout/right_sidebar :: sidebar"></div>
+    <!-- Right Slidebar end -->
+
+    <!--footer start-->
+    <div th:replace="layout/footer :: footer"></div>
+    <!--footer end-->
+
+</section>
+
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/js/jquery.nicescroll.js"></script>
+<script src="/js/respond.min.js"></script>
+
+<!--right slidebar-->
+<script src="/js/slidebars.min.js"></script>
+
+<!--common script for all pages-->
+<script src="/js/common-scripts.js"></script>
+
+<script th:replace="${scripts}" ></script>
+
+<script th:inline="javascript">
+
+    var nav = document.getElementById("nav-accordion");
+    var path = location.pathname;
+    var allA = nav.querySelectorAll("a");
+    for (var i=0; i < allA.length; i++) {
+        var aTag = allA[i];
+        if (aTag.pathname == path) {
+//            allA[i].setAttribute("class", "active");
+            aTag.setAttribute("class", "active");
+            if (path != "/index") {
+                aTag.parentElement.parentElement.parentElement.firstElementChild.setAttribute("class", "active");
+            }
+            break;
+        }
+    }
+
+    function doSubmitForm() {
+        var form = document.createElement("form");
+        var input = document.createElement("input");
+        document.body.appendChild(form);
+        form.appendChild(input);
+        input.name = [[${_csrf.parameterName}]];
+        input.value = [[${_csrf.token}]];
+        form.action = "/logout";
+        form.method = "post";
+        form.submit();
+    }
+
+</script>
+
+</body>
+</html>

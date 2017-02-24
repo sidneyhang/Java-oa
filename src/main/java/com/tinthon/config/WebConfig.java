@@ -80,9 +80,11 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/login").setViewName("auth/login");
+        registry.addViewController("/register").setViewName("auth/registration");
         registry.addViewController("/index").setViewName("index");
-        registry.addViewController("/test").setViewName("test");
+        registry.addViewController("/test").setViewName("auth/login");
+
     }
 
     /**
